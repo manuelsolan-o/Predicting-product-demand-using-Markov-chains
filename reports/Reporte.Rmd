@@ -1,0 +1,78 @@
+---
+title: "Reporte"
+author:
+- Alejandra Velasco Zárate A01635453
+- José Antonio Juárez Pacheco A00572186
+- Jose Carlos Yamuni Contreras A01740285
+- Juan Manuel Hernández Solano A00572208
+- Mayra Sarahí De Luna Castillo A01635774"
+date: "2023-09-27"
+output:
+  pdf_document: default
+  html_document: default
+header-includes: \renewcommand{\and}{\\}
+---
+
+## Introducción
+
+La demanda de medicamentos ha experimentado una evolución significativa a lo largo de la historia. Desde las prácticas de medicina tradicional y herbolaria en tiempos antiguos, hasta el desarrollo de la farmacología moderna. La expansión de la investigación y el desarrollo farmacéutico ha llevado a la creación de una amplia gama de medicamentos para diversas enfermedades. Esta incremento en los medicamentos coloca a las empresas farmacéuticas en situaciones de incertidumbre, ya que desconocen cuando la demanda de un medicamento disminuye o cuando aumenta. Esta falta de información puede ocasionar pérdidas económicas que representan un gran impacto negativo. De ahí nace la necesidad de analizar el comportamiento en el mercado farmacéutico, para conocer las probabilidades de que un producto sea desactivado o activado.
+
+## Objetivo
+
+El objetivo de este proyecto es analizar la probabilidad de que cada cliente deje comprar cada producto y si los producto estuvieran desactivados, conocer la probabilidad de que el cliente vuelva a comprar estos productos. Por otra parte, se busca analizar los datos para generar diversas hipótesis y así conocer los diferentes patrones y comportamientos de los clientes.
+
+## Contexto
+
+*PiSA Farmacéutica* es una empresa 100% mexicana, fundada en 1946, que se dedica a desarrollar productos y servicios integrales para los segmentos de salud pública y privada en México, Estados Unidos, Latinoamérica y el Caribe. El crecimiento de PiSA Farmacéutica ha sido una constante durante lo largo de los años y se les distingue por su gran capacidad de producción y amplia experiencia en el mercado, lo cuál les ha permitido marcar la pauta para su crecimiento y expansión internacional. Una de las unidades de negocios de grupo PiSA de distribución masiva a la parte más fragmentada del mercado es Medicom. Medicom se dedica a vender medicamentos y productos de salud a hospitales (clínicas), farmacias y distribuidores. Los comportamientos de los 3 perfiles de venta de Medicom son:
+
+-   Hospitales (clínicas): Se venden productos para atención de los pacientes, son compras recurrentes y en menor cantidad, por lo tanto la competencia es menor.
+
+-   Farmacias: Los productos que se venden son para consumo en casa, por lo cual su compra es recurrente, en menor cantidad y hay mayor competencia.
+
+-   Distribuidores: se surten productos a clínicas y farmacias, por ende, las compras son menos recurrentes pero en grandes cantidades.
+
+El 80% de los clientes de Medicom representan el 20 % del consumo del mercado y cuenta con más de 4,000 clientes a nivel nacional. Debido al gran impacto que tiene Medicom en PiSA, surge la necesidad de analizar el comportamiento de oferta y demanda de los productos de PiSA para conocer la probabilidad de activación y desactivación de los productos.
+
+## Estrategia de metodología
+
+La base de datos con la que se trabajará este proyecto tiene una dimensión de 6973900 filas (entradas) y cuatro columnas:
+
+-   Periodo $\rightarrow$ hace referencia al mes y al año en la que se compro el producto.
+
+
+-   Cliente_id $\rightarrow$ es el ID único del cliente que compro el producto.
+
+
+-   Material_id $\rightarrow$ se refiere al id del producto que fue comprado por el cliente.
+
+
+-   Tipo_cliente $\rightarrow$ indica la categoría del cliente (hospitales, farmacias o distribuidor).
+
+
+### Base de datos
+```{r pressure, echo=FALSE}
+data <- read.csv('data.csv')
+data <- subset(data, select = c(-1))
+head(data,5)
+```
+
+
+En esta base de datos solo aparecen registros de ventas, por lo que si un cliente no compró $x$ material en $y$ periodo, no aparecerá en los datos. De acuerdo a las necesidades del proyecto, a las herramientas dominadas y el conocimiento adquirido en la materia de formación *Optimización Estocástica* el primer acercamieto para lograr los objetivos es las Cadenas de Markov. Una cadena de Markov es una serie de eventos, en el cual, la probabilidad de que ocurra un evento depende del evento inmediato anterior. A esto se le conoce como *pérdida de memoria*, es decir, las cadenas de Markov solos 'recuerdan' el último evento y este evento condiciona las posibilidades de los eventos futuros. Las cadenas de Markov se han utilizado para analizar los patrones de compra,los deudores morosos, para planear las necesidades de personal y para analizar el reemplazo de equipo.
+
+### Metodología
+
+1.  Cargar los datos y analizarlos: ver si hay datos faltantes, tipo de variable por columna, dimensiones, tipos de cliente, número de clientes únicos, número de productos únicos, periodo de tiempo, entre otras cosas.
+
+2.  De la base de datos proporcionada, se agrupará por $cliente\_id$ y por $material\_id$ . Para cada producto $x$ por cada cliente $y$ se obtendrá la matriz de transición para poder obtener las probabilidades.
+
+3.  El paso dos se puede hacer haciendo una función general, que automatice todo el proceso.
+
+Formulación de las cadenas de Markov: 
+
+-   Los estados planteados para este proyecto son: $\mathcal{E} = \{0,1\}$ , donde $0$ es que el producto fue comprado y $1$ que el producto no fue comprado.
+
+-   El tiempo se maneja en meses: ejemplo, $t_0 = enero \: 2021$, $t_1 = febrero \: 2021$.
+
+-   Las matrices de transición son de $2\times 2$.
+
+Esta metodología propuesta es la primera idea que se generó y que se busca desarrollar, es por eso que no es demasiado extensa o detallada. Con el avance del proyecto y la profundización de la base de datos, se podrán generar diferentes análisis para lograr los objetivos, ya con muchos de los procesos más claros y aterrizados. Esta primera aproximación al proyecto puede proporcionar mucha información valiosa para el socio formador *PiSA Farmacéutica*.
