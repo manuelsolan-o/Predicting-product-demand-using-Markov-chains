@@ -51,29 +51,18 @@ def matriz_transicion(tipo_cliente, cliente_id, material_id):
     
     t = []
 
-    for x in range(0, len(id_cliente['periodo'])-1):
+    for x in range(0, len(id_cliente['periodo'])-2):
         if (id_cliente['periodo'][x+1] - id_cliente['periodo'][x]).days <= 31:
             t.append(0)
         else:
             for _ in range(((id_cliente['periodo'][x+1] - id_cliente['periodo'][x]).days // 30)-1):
                 t.append(1)
-            #t.append(0)
+            t.append(0)
     
-    t_1 = []
-
-    for x in range(0, len(id_cliente['periodo'])-1):
-        if (id_cliente['periodo'][x+1] - id_cliente['periodo'][x]).days <= 31:
-            t_1.append(0)
-        else:
-            for _ in range(((id_cliente['periodo'][x+1] - id_cliente['periodo'][x]).days // 30)-1):
-                t_1.append(1)
-            #t_1.append(1)
-            
-
     estados = pd.DataFrame()
 
     estados['t'] = t
-    estados['t_1'] = t_1
+    estados['t_1'] = t
     
     Xt = estados['t'][0:-1].reset_index(drop=True).rename('X_t')
     Xt_1 = estados['t_1'][1::].reset_index(drop=True).rename('X_t+1')
