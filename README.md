@@ -8,6 +8,7 @@
   <em> This project was developed in collaboration with Medicom, a business unit of Grupo PISA. </em>
 </p>
 
+__Authors__: [Alejandra Velaco](https://github.com/Aleevz), [Manuel Solano](https://github.com/manuelsolan-o), [José Carlos Yamuni](https://github.com/josecyamuni), [Antonio Juaréz](https://github.com/JAJP2203), [Mayra de Luna](https://github.com/mayradlu)
 
 ## General Information
 
@@ -24,3 +25,9 @@ The top 20% of Medicom's customers represent 80% of the market consumption, and 
 ## Objective
 
 The objective of this project is to analyze the probability of each customer discontinuing the purchase of each product and, in the event that the products are deactivated, to understand the probability of customers repurchasing these products. Furthermore, the aim is to analyze the data in order to formulate various hypotheses and thereby gain insights into different customer patterns and behaviors.
+
+## Instalation
+
+Run the app.py file from the directory where the app has been downloaded
+
+    streamlit run app.py
