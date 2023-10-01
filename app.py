@@ -22,24 +22,42 @@ data = cargar_datos()
 
 # Función para obtener la matriz de transición
 def matriz_transicion(tipo_cliente, cliente_id, material_id):
+        
     # Subset
+
     cliente_tipo = data.loc[data['tipo_cliente'] == tipo_cliente]
     pruducto = cliente_tipo.loc[cliente_tipo['material_id'] == material_id]
     id_cliente = pruducto.loc[pruducto['cliente_id'] == cliente_id]
     id_cliente.reset_index(inplace = True)
     id_cliente.drop('index', axis = 1, inplace = True)
     
+    start = pd.DataFrame()
+
+    start['periodo'] = [pd.Timestamp(2021, 1, 1)]
+    start['cliente_id'] = [cliente_id]
+    start['material_id'] = [material_id]
+    start['tipo_cliente'] = [tipo_cliente]
+
+    end = pd.DataFrame()
+    end['periodo'] = [pd.Timestamp(2023, 9, 1)]
+    end['cliente_id'] = [cliente_id]
+    end['material_id'] = [material_id]
+    end['tipo_cliente'] = [tipo_cliente]
+
+    id_cliente = pd.concat([start, id_cliente, end], axis = 0)
+    id_cliente.reset_index(inplace = True)
+
     # Estados: Compró o no compró
     
-    t = [0]
+    t = []
 
-    for x in range(0, len(id_cliente['periodo'])-2):
+    for x in range(0, len(id_cliente['periodo'])-1):
         if (id_cliente['periodo'][x+1] - id_cliente['periodo'][x]).days <= 31:
             t.append(0)
         else:
             for _ in range(((id_cliente['periodo'][x+1] - id_cliente['periodo'][x]).days // 30)-1):
                 t.append(1)
-            t.append(0)
+            #t.append(0)
     
     t_1 = []
 
@@ -49,7 +67,7 @@ def matriz_transicion(tipo_cliente, cliente_id, material_id):
         else:
             for _ in range(((id_cliente['periodo'][x+1] - id_cliente['periodo'][x]).days // 30)-1):
                 t_1.append(1)
-            t_1.append(0)
+            #t_1.append(1)
             
 
     estados = pd.DataFrame()
@@ -67,11 +85,21 @@ def matriz_transicion(tipo_cliente, cliente_id, material_id):
     
     return matriz_transicion
 
+# Filtrar los datos en función del tipo de cliente seleccionado
+def filtrar_cliente_id(tipo_cliente):
+    return data[data['tipo_cliente'] == tipo_cliente]['cliente_id'].unique()
+
+# Filtrar los materiales en función del cliente_id seleccionado
+def filtrar_material_id(cliente_id):
+    return data[data['cliente_id'] == cliente_id]['material_id'].unique()
+
 # Menú desplegable para seleccionar parámetros
 st.sidebar.title("Menú de Parámetros")
 tipo_cliente = st.sidebar.selectbox('Tipo de Cliente:', list(data['tipo_cliente'].unique()))
-cliente_id = st.sidebar.selectbox('Cliente ID:', list(data['cliente_id'].unique()))
-material_id = st.sidebar.selectbox('Material ID:', list(data['material_id'].unique()))
+cliente_ids_disponibles = filtrar_cliente_id(tipo_cliente)
+cliente_id = st.sidebar.selectbox('Cliente ID:', cliente_ids_disponibles)
+materiales_disponibles = filtrar_material_id(cliente_id)
+material_id = st.sidebar.selectbox('Material ID:', materiales_disponibles)
 pasos_t = st.sidebar.slider('Pasos (t):', 1, 50, 1)
 
 # Botón para generar resultados
