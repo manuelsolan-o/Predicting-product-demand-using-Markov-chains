@@ -31,33 +31,32 @@ def matriz_transicion(tipo_cliente, cliente_id, material_id):
     id_cliente.reset_index(inplace = True)
     id_cliente.drop('index', axis = 1, inplace = True)
     
-    start = pd.DataFrame()
-
-    start['periodo'] = [pd.Timestamp(2021, 1, 1)]
-    start['cliente_id'] = [cliente_id]
-    start['material_id'] = [material_id]
-    start['tipo_cliente'] = [tipo_cliente]
-
-    end = pd.DataFrame()
-    end['periodo'] = [pd.Timestamp(2023, 9, 1)]
-    end['cliente_id'] = [cliente_id]
-    end['material_id'] = [material_id]
-    end['tipo_cliente'] = [tipo_cliente]
-
-    id_cliente = pd.concat([start, id_cliente, end], axis = 0)
-    id_cliente.reset_index(inplace = True)
-
-    # Estados: Compró o no compró
+    # Fecha de primer registro
     
-    t = []
+    fecha_inicio = pd.Timestamp(2021, 1, 1)
+    # Fecha del último registro 
+    
+    fecha_fin = pd.Timestamp(2023, 9, 1)
 
-    for x in range(0, len(id_cliente['periodo'])-2):
-        if (id_cliente['periodo'][x+1] - id_cliente['periodo'][x]).days <= 31:
-            t.append(0)
-        else:
-            for _ in range(((id_cliente['periodo'][x+1] - id_cliente['periodo'][x]).days // 30)-1):
-                t.append(1)
-            t.append(0)
+    frecuencia = pd.DateOffset(months=1)
+
+    fechas = []
+
+    while fecha_inicio <= fecha_fin:
+        fechas.append(fecha_inicio)
+        fecha_inicio += frecuencia
+
+    periodos = {}
+
+    for k,v in enumerate(fechas):
+        periodos[v] = k 
+
+    t = [1 for x in range(len(fechas))]
+
+    indices = [periodos[x] for x in id_cliente['periodo']]
+
+    for i in indices:
+        t[i] = 0
     
     estados = pd.DataFrame()
 
