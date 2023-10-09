@@ -10,7 +10,7 @@ from numpy import linalg as LA
 # Configurar Streamlit
 st.set_page_config(page_title="Predicción demanda de producto con cadenas de Markov", page_icon=":bar_chart:")
 
-st.image("images/medicom.png", caption = 'Este proyecto fue desarrollado en colaboración con Medicom, una unidad de negocio del Grupo PISA.', use_column_width=True)
+st.image("images/medicom.png", caption = 'Este proyecto fue desarrollado en colaboración con Medicom, una unidad de negocio del Grupo PISA.', width=650)
 
 # Leer los datos desde un archivo Parquet
 @st.cache_data  # Caché para acelerar la lectura de datos
@@ -122,8 +122,14 @@ if st.sidebar.button('Generar Resultados'):
 st.sidebar.info("Esta aplicación permite calcular la probabilidad de que un cliente compre o no compre un producto en determinado número de pasos (meses)")
 
 # Créditos y fuente de datos
-st.sidebar.text("Siguenos en twitter: 👇")
-st.sidebar.text("Autores: @manuelsolan_o, @tonito, @ale, @mayra, @yamuni")
+st.sidebar.text("Síguenos en Github: 👇")
+st.sidebar.text("Autores: @manuelsolan_o, @JAJP2203, @Aleevz, @mayradlu, @jcyamuni44")
+st.sidebar.text("Síguenos en LinkedIn: 👇")
+st.sidebar.write("Alejandra >> [link](https://www.linkedin.com/in/alejandra-velasco-zarate/)")
+st.sidebar.write("José Antonio >> [link](https://www.linkedin.com/in/jose-antonio-juarez-pacheco/)")
+st.sidebar.write("José Carlos >> [link](https://www.linkedin.com/in/jos%C3%A9-carlos-yamuni-contreras-67a156291/)")
+st.sidebar.write("Juan Manuel (twitter) >> [link](https://twitter.com/manuelsolan_o)")
+st.sidebar.write("Mayra >> [link](https://www.linkedin.com/in/mayradeluna/)")
 #st.sidebar.text("Fuente de Datos: 'data/tec_estocasticos.parquet'")
 
 # Código para ejecutar la aplicación de Streamlit
@@ -139,13 +145,13 @@ if 'df' in locals():
         st.write(df)
     
     with col2:
-        st.text(f"La probabilidad de que el cliente {cliente_id}\ncompre el producto {material_id}, dado que ya lo\ncompró es de {df['Compra']['Compra']} %")
+        st.text(f"La probabilidad de que el cliente {cliente_id}\ncompre el producto {material_id}, dado que ya lo\ncompró es de {df['Compra']['Compra']} ({round(df['Compra']['Compra']*100,2)}%)")
         
-        st.text(f"La probabilidad de que el cliente {cliente_id}\nno compre el producto {material_id}, dado que ya lo\ncompró es de {df['Compra']['No Compra']} %")
+        st.text(f"La probabilidad de que el cliente {cliente_id}\nno compre el producto {material_id}, dado que ya lo\ncompró es de {df['Compra']['No Compra']} ({round(df['Compra']['No Compra']*100,2)}%)")
         
-        st.text(f"La probabilidad de que el cliente {cliente_id}\ncompre el producto {material_id}, dado que no lo\ncompró es de {df['No Compra']['Compra']} %")
+        st.text(f"La probabilidad de que el cliente {cliente_id}\ncompre el producto {material_id}, dado que no lo\ncompró es de {df['No Compra']['Compra']} ({round(df['No Compra']['Compra']*100,2)}%)")
 
-        st.text(f"La probabilidad de que el cliente {cliente_id}\nno compre el producto {material_id}, dado que no lo\ncompró es de {df['No Compra']['No Compra']} %")
+        st.text(f"La probabilidad de que el cliente {cliente_id}\nno compre el producto {material_id}, dado que no lo\ncompró es de {df['No Compra']['No Compra']} ({round(df['No Compra']['No Compra']*100,2)}%)")
         
         #recurrencia_media(P, t)
 
@@ -158,7 +164,7 @@ else:
 def recurrencia_media(P, t):
     #st.text(f'{t}')
     if 1 in np.array(P) or 0 in np.array(P):
-        st.text('Esta Cadena no es Ergódica, no se puede saber las recurrencias medias')
+        st.text('Esta Cadena no es Ergódica, no se puede saber los tiempos de recurrencias medias')
     else:
         Lambda, Q = LA.eig(P)
         Lambda = np.array([0 if x < 1 else x for x in Lambda])
