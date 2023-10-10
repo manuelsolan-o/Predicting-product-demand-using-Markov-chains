@@ -27,7 +27,14 @@ The top 20% of Medicom's customers represent 80% of the market consumption, and 
 The objective of this project is to analyze the probability of each customer discontinuing the purchase of each product and, in the event that the products are deactivated, to understand the probability of customers repurchasing these products. Furthermore, the aim is to analyze the data in order to formulate various hypotheses and thereby gain insights into different customer patterns and behaviors.
 
 ## Instalation
+### Step 1)
 
+To install the libraries needed to run the app, we need to write the following in the terminal:
+pip install -r requirements.txt
+OR
+pip3 install -r requirements.txt
+
+### Step 2)
 Run the app.py file from the directory where the app has been downloaded
 
     streamlit run app.py
