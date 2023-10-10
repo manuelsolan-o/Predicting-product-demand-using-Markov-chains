@@ -124,7 +124,7 @@ if st.sidebar.button('Generar Resultados'):
 st.sidebar.info("Esta aplicación permite calcular la probabilidad de que un cliente compre o no compre un producto en determinado número de pasos (meses)")
 
 # Créditos y fuente de datos
-st.sidebar.subheader("Síguenos en Github: 👇")
+st.sidebar.text("Síguenos en Github: 👇")
 
 st.sidebar.write("[manuelsolan_o](https://github.com/manuelsolan-o)")
 
@@ -136,7 +136,7 @@ st.sidebar.write("[mayradlu](https://github.com/mayradlu)")
 
 st.sidebar.write("[jcyamuni44](https://github.com/josecyamuni)")
 
-st.sidebar.subheader("Síguenos en LinkedIn: 👇")
+st.sidebar.text("Síguenos en LinkedIn: 👇")
 st.sidebar.write("[Alejandra Velasco](https://www.linkedin.com/in/alejandra-velasco-zarate/)")
 st.sidebar.write("[Antonio Juaréz](https://www.linkedin.com/in/jose-antonio-juarez-pacheco/)")
 st.sidebar.write("[José Carlos Yamuni](https://www.linkedin.com/in/jos%C3%A9-carlos-yamuni-contreras-67a156291/)")

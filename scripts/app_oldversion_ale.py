@@ -125,13 +125,23 @@ st.sidebar.info("Esta aplicación permite calcular la probabilidad de que un cli
 
 # Créditos y fuente de datos
 st.sidebar.text("Síguenos en Github: 👇")
-st.sidebar.text("Autores: @manuelsolan_o, @JAJP2203, @Aleevz, @mayradlu, @jcyamuni44")
+
+st.sidebar.write("[manuelsolan_o](https://github.com/manuelsolan-o)")
+
+st.sidebar.write("[JAJP2203](https://github.com/JAJP2203)")
+
+st.sidebar.write("[Aleevz](https://github.com/Aleevz)")
+
+st.sidebar.write("[mayradlu](https://github.com/mayradlu)")
+
+st.sidebar.write("[jcyamuni44](https://github.com/josecyamuni)")
+
 st.sidebar.text("Síguenos en LinkedIn: 👇")
-st.sidebar.write("Alejandra >> [link](https://www.linkedin.com/in/alejandra-velasco-zarate/)")
-st.sidebar.write("José Antonio >> [link](https://www.linkedin.com/in/jose-antonio-juarez-pacheco/)")
-st.sidebar.write("José Carlos >> [link](https://www.linkedin.com/in/jos%C3%A9-carlos-yamuni-contreras-67a156291/)")
-st.sidebar.write("Juan Manuel (twitter) >> [link](https://twitter.com/manuelsolan_o)")
-st.sidebar.write("Mayra >> [link](https://www.linkedin.com/in/mayradeluna/)")
+st.sidebar.write("[Alejandra Velasco](https://www.linkedin.com/in/alejandra-velasco-zarate/)")
+st.sidebar.write("[Antonio Juaréz](https://www.linkedin.com/in/jose-antonio-juarez-pacheco/)")
+st.sidebar.write("[José Carlos Yamuni](https://www.linkedin.com/in/jos%C3%A9-carlos-yamuni-contreras-67a156291/)")
+st.sidebar.write("[Manuel Solano (twitter)](https://twitter.com/manuelsolan_o)")
+st.sidebar.write("[Mayra de Luna](https://www.linkedin.com/in/mayradeluna/)")
 #st.sidebar.text("Fuente de Datos: 'data/tec_estocasticos.parquet'")
 
 # Código para ejecutar la aplicación de Streamlit
