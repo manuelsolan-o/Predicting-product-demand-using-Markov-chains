@@ -112,9 +112,11 @@ if st.sidebar.button('Generar Resultados'):
         df = pd.DataFrame(P_n.round(decimals=4), index=['Compra', 'No Compra'])
         df.rename(columns={0: 'Compra'}, inplace=True)
         df.rename(columns={1: 'No Compra'}, inplace=True)
-        
+
         # Llama a la función recurrencia_media y muestra la información adicional
         recurrencia_media(matriz)
+        
+        
     except:
         None
     
@@ -143,6 +145,12 @@ if 'df' in locals():
     with col1:
         st.subheader(f"Matriz de transición a {pasos_t} pasos (meses)")
         st.write(df)
+        st.subheader("Recomendaciones")
+        if df['Compra']['Compra'] >= 0.70: 
+            st.text(f"Como la probabilidad de que el cliente\ncompre el producto, dado que ya lo\ncompró es alta ({round(df['Compra']['Compra']*100,2)}%),\nse recomienda que se siga manteniendo\nla producción de este producto.")
+        else:
+            st.text(f"Como la probabilidad de que el cliente \nno compre el producto, dado que ya lo \ncompró es no alta ({round(df['Compra']['Compra']*100,2)}%),\nse recomienda que se reduzca la\nproducción de este producto.")
+
     
     with col2:
         st.text(f"La probabilidad de que el cliente {cliente_id}\ncompre el producto {material_id}, dado que ya lo\ncompró es de {df['Compra']['Compra']} ({round(df['Compra']['Compra']*100,2)}%)")
@@ -185,8 +193,8 @@ def recurrencia_media(P, t):
         st.text(f'El tiempo promedio que tarda el cliente en no comprar el producto,\ndado que lo había comprado es de {round(compro_nocompro, 2)} meses')
 
         st.text(f'El tiempo promedio que tarda el cliente en comprar el producto,\ndado que no lo había comprado es de {round(nocompro_compro, 2)} meses')
-    
-    
+
+
 # Agrega la sección de texto con información adicional
 st.subheader("Recurrencia Media")
 #st.text("Aquí puedes encontrar información adicional sobre la recurrencia media:")
