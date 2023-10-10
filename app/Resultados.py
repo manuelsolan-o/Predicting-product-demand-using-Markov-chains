@@ -10,12 +10,12 @@ from numpy import linalg as LA
 # Configurar Streamlit
 st.set_page_config(page_title="Predicción demanda de producto con cadenas de Markov", page_icon=":bar_chart:")
 
-st.image("C:/Users/Usuario/Desktop/Estocastica/Reto/Reto-Markov/Predicting-product-demand-using-Markov-chains/images/medicom.png", caption = 'Este proyecto fue desarrollado en colaboración con Medicom, una unidad de negocio del Grupo PISA.', width=650)
+st.image("images/medicom.png", caption = 'Este proyecto fue desarrollado en colaboración con Medicom, una unidad de negocio del Grupo PISA.', width=650)
 
 # Leer los datos desde un archivo Parquet
 @st.cache_data  # Caché para acelerar la lectura de datos
 def cargar_datos():
-    data = pd.read_parquet('C:/Users/Usuario/Desktop/Estocastica/Reto/Reto-Markov/Predicting-product-demand-using-Markov-chains/data/tec_estocasticos.parquet', engine='pyarrow')
+    data = pd.read_parquet('data/tec_estocasticos.parquet', engine='pyarrow')
     data['periodo'] = pd.to_datetime(data['periodo'])
     data.sort_values(by='periodo', inplace=True)
     data.dropna(inplace=True)
