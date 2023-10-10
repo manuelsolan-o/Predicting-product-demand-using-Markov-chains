@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Cadenas de Markov")
+st.set_page_config(page_title="¿Cómo funciona la app?",page_icon=":bar_chart:")
+
+st.title("¿Cómo funciona la app?")
 
 st.text('''Para analizar el comportamiento del mercado farmacéutico y conocer las proba-
 bilidades de que un producto sea desactivado o activado en una de las unidades

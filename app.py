@@ -10,7 +10,7 @@ from numpy import linalg as LA
 # Configurar Streamlit
 st.set_page_config(page_title="Predicción demanda de producto con cadenas de Markov", page_icon=":bar_chart:")
 
-st.image("images/medicom.png", caption = 'Este proyecto fue desarrollado en colaboración con Medicom, una unidad de negocio del Grupo PISA.', width=650)
+st.image("images/medicom0.png", caption = 'Este proyecto fue desarrollado en colaboración con Medicom, una unidad de negocio del Grupo PISA.', width=650)
 
 # Leer los datos desde un archivo Parquet
 @st.cache_data  # Caché para acelerar la lectura de datos
@@ -174,10 +174,11 @@ if 'df' in locals():
         #recurrencia_media(P, t)
 
 else:
-    st.subheader("No existe información de ese cliente comprando ese producto")
+    st.subheader("Presiona el botón: 'Generar Resultados' en el menú de parámetros para generar la información")
 
 
 #P,t = matriz_transicion(tipo_cliente, cliente_id, material_id)
+
 
 def recurrencia_media(P, t):
     #st.text(f'{t}')
@@ -204,8 +205,11 @@ def recurrencia_media(P, t):
 
         st.text(f'El tiempo promedio que tarda el cliente en comprar el producto,\ndado que no lo había comprado es de {round(nocompro_compro, 2)} meses')
 
-
-# Agrega la sección de texto con información adicional
-st.subheader("Recurrencia Media")
-#st.text("Aquí puedes encontrar información adicional sobre la recurrencia media:")
-recurrencia_media(P,t)
+if 'df' in locals():
+    # Agrega la sección de texto con información adicional
+    st.subheader("Recurrencia Media")
+    #st.text("Aquí puedes encontrar información adicional sobre la recurrencia media:")
+    recurrencia_media(P,t)
+else:
+    pass
+    #st.subheader("Presiona el botón: 'Generar Resultados' en el menú de parámetros para generar la información")
