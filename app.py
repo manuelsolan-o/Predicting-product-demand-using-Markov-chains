@@ -10,7 +10,7 @@ st.set_page_config(page_title="Predicción demanda de producto con cadenas de Ma
 # Leer los datos desde un archivo Parquet
 @st.cache_data  # Caché para acelerar la lectura de datos
 def cargar_datos():
-    data = pd.read_parquet('data/tec_estocasticos.parquet', engine='pyarrow')
+    data = pd.read_parquet('/Users/tonitojuarez/Documents/GitHub/Predicting-product-demand-using-Markov-chains/data/tec_estocasticos.parquet', engine='pyarrow')
     data['periodo'] = pd.to_datetime(data['periodo'])
     data.sort_values(by='periodo', inplace=True)
     data.dropna(inplace=True)
