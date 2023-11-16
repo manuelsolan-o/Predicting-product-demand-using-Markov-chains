@@ -8,7 +8,7 @@
   <em> This project was developed in collaboration with Medicom, a business unit of Grupo PISA. </em>
 </p>
 
-__Authors__: [Alejandra Velaco](https://github.com/Aleevz), [Manuel Solano](https://github.com/manuelsolan-o), [José Carlos Yamuni](https://github.com/josecyamuni), [Antonio Juaréz](https://github.com/JAJP2203), [Mayra de Luna](https://github.com/mayradlu)
+__Authors__: [Manuel Solano](https://github.com/manuelsolan-o), [Alejandra Velaco](https://github.com/Aleevz), [José Carlos Yamuni](https://github.com/josecyamuni), [Antonio Juaréz](https://github.com/JAJP2203), [Mayra de Luna](https://github.com/mayradlu)
 
 ## General Information
 
